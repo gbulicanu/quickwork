@@ -15,7 +15,7 @@ def print_results(tickets, pr_reviews, print_time = False, print_to_clipboard = 
     for key, (comments, time_in_secs) in tickets.items():
         comments_list = list(comments)
         comments_list.sort()
-        comments_str = ", ".join(comments)
+        comments_str = ", ".join(comments_list)
         if print_time:
             time_rep = strfdelta(timedelta(seconds=int(time_in_secs)), '{H}h {M}m')
             lines.append(f"* {key} - {comments_str} - {time_rep}")

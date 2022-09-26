@@ -18,7 +18,7 @@ from app.jira import execute_jql
 ])
 
 def test_execute_jql(from_days, expected_jql, mocker: MockerFixture, requests_mock: Mocker):
-    """ Test execute_jql default.
+    """ Test execute_jql.
     """
     response_text = "{}"
     request_matcher = requests_mock.request(
