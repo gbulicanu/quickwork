@@ -9,10 +9,12 @@ requests = "*"
 jsonpath-ng = "*"
 python-dotenv = "*"
 environment = "*"
+pyinstaller = "*"
 
 [dev-packages]
 pytest = "*"
 pytest-cov = "*"
+pylint = "*"
 
 [requires]
 python_version = "3.9"

@@ -1,0 +1,55 @@
+# This workflow will install Python dependencies, run tests and lint with a single version of Python
+# For more information see: https://help.github.com/actions/language-and-framework-guides/using-python-with-github-actions
+
+name: Python application
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Python
+      uses: actions/setup-python@v3
+      with:
+        python-version: "3.9"
+    - name: Dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install pipenv pylint
+        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+        if [ -f Pipfile ]; then pipenv install --dev; fi
+    - name: Lint
+      run: |
+        pipenv run pylint $(git ls-files '*.py')
+    - name: Test
+      run: |
+        pipenv run pytest --cov-config=.coveragerc --cov-report html --cov=app tests/
+    - name: Coverage
+      id: coverage_comment
+      uses: py-cov-action/python-coverage-comment-action@v3
+      with:
+        GITHUB_TOKEN: ${{ github.token }}
+    - name: PR Comment
+      uses: actions/upload-artifact@v3
+      if: steps.coverage_comment.outputs.COMMENT_FILE_WRITTEN == 'true'
+      with:
+        # If you use a different name, update COMMENT_ARTIFACT_NAME accordingly
+        name: python-coverage-comment-action
+        # If you use a different name, update COMMENT_FILENAME accordingly
+        path: python-coverage-comment-action.txt
+    - name: Installer
+      run: |
+        pipenv run pyinstaller main.py -n qw
+        ls -al dist/qw/
+
