@@ -34,7 +34,7 @@ jobs:
         pipenv run pylint $(git ls-files '*.py')
     - name: Test
       run: |
-        pipenv run pytest --cov-report html --cov=app tests/
+        pipenv run pytest --cov-config=.coveragerc --cov---cov-report html --cov=app tests/
     - name: Coverage
       id: coverage_comment
       uses: py-cov-action/python-coverage-comment-action@v3
