@@ -35,11 +35,13 @@ jobs:
     - name: Test
       run: |
         pipenv run pytest --cov-config=.coveragerc --cov-report xml --cov=app tests/
-    - name: Codcov
-      run: |
-        curl -Os https://uploader.codecov.io/latest/linux/codecov
-        chmod +x codecov
-        ./codecov
+    - name: Codecov
+      uses: codecov/codecov-action@v3
+      with:
+        env_vars: OS,PYTHON
+        fail_ci_if_error: true
+        files: ./coverage.xml
+        flags: unittests
     - name: Coverage
       id: coverage_comment
       uses: py-cov-action/python-coverage-comment-action@v3
