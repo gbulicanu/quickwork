@@ -34,13 +34,18 @@ jobs:
         pipenv run pylint $(git ls-files '*.py')
     - name: Test
       run: |
-        pipenv run pytest --cov-config=.coveragerc --cov-report html --cov=app tests/
+        pipenv run pytest --cov-config=.coveragerc --cov-report xml --cov=app tests/
+    - name: Codcov
+      run: |
+        curl -Os https://uploader.codecov.io/latest/linux/codecov
+        chmod +x codecov
+        ./codecov
     - name: Coverage
       id: coverage_comment
       uses: py-cov-action/python-coverage-comment-action@v3
       with:
         GITHUB_TOKEN: ${{ github.token }}
-    - name: PR Comment
+    - name: Comment
       uses: actions/upload-artifact@v3
       if: steps.coverage_comment.outputs.COMMENT_FILE_WRITTEN == 'true'
       with:
