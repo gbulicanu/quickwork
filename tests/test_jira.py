@@ -12,6 +12,9 @@ from app.jira import execute_jql
 @pytest.mark.parametrize(["from_days", "expected_jql"], [
     (None, "worklogAuthor = currentUser() AND worklogDate >= startOfDay()"),
     (0, "worklogAuthor = currentUser() AND worklogDate >= startOfDay()"),
+    (1, "worklogAuthor = currentUser() AND worklogDate >= startOfDay()"),
+    (-1, "worklogAuthor = currentUser() AND worklogDate >= startOfDay(-1)"),
+    (-2, "worklogAuthor = currentUser() AND worklogDate >= startOfDay(-2)"),
 ])
 
 def test_execute_jql(from_days, expected_jql, mocker: MockerFixture, requests_mock: Mocker):

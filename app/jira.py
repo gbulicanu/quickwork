@@ -12,7 +12,7 @@ from .environment import JIRA_ENDPOINT, JIRA_TIMEOUT, JIRA_USER, JIRA_SECRET
 def execute_jql(from_days = None, max_results = 10):
     """ Execute JIRA JQL against configured Atlassian jira account.
     """
-    if from_days == 0:
+    if from_days is not None and from_days >= 0:
         from_days = None
 
     auth = HTTPBasicAuth(JIRA_USER, JIRA_SECRET)
