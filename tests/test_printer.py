@@ -20,6 +20,7 @@ from app.printer import print_results
             }, {
                 "TEST-20": 5 * 60, # 5m
                 "TEST-21": 5 * 60, # 5m
+                "TEST-22": 5 * 60, # 5m
             },
             False,
             (
@@ -28,7 +29,8 @@ from app.printer import print_results
                 "\n"
                 "PR Review(s):\n"
                 "* TEST-20\n"
-                "* TEST-21"
+                "* TEST-21\n"
+                "* TEST-22"
             )
         ),
         (
