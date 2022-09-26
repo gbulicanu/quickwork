@@ -38,9 +38,11 @@ jobs:
     - name: Codecov
       uses: codecov/codecov-action@v3
       with:
+        env_vars: OS,PYTHON
         fail_ci_if_error: true
         files: ./coverage.xml
         flags: unittests
+        version: "v0.1.15"
     - name: Coverage
       id: coverage_comment
       uses: py-cov-action/python-coverage-comment-action@v3
