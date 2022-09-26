@@ -9,6 +9,7 @@ requests = "*"
 jsonpath-ng = "*"
 python-dotenv = "*"
 environment = "*"
+pyinstaller = "*"
 
 [dev-packages]
 pytest = "*"
