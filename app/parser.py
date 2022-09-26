@@ -12,15 +12,13 @@ def __filter_worklog(current, from_date):
 def process_jira(jira_result, days=-1):
     """ Process JIRA JSON result.
     """
-    json_path_issues = parse("$.issues[*].key")
-    issue_keys = [match.value for match in json_path_issues.find(jira_result)]
     non_pr_review = {}
     pr_review = {}
     from_time = date.today() + timedelta(days=days)
 
-    for issue_key in issue_keys:
-        json_path_issue = parse(f"$.issues[?(@.key='{issue_key}')]")
-        issue = [match.value for match in json_path_issue.find(jira_result)][0]
+    for issue_key in [match.value for match in parse("$.issues[*].key").find(jira_result)]:
+        issue = [match.value for match \
+            in parse(f"$.issues[?(@.key='{issue_key}')]").find(jira_result)][0]
         json_path_worklogs = parse(
             f"$.fields.worklog.worklogs[?(@.author.emailAddress='gheorghe@gocontractor.com' \
               & @.started >= '{from_time}')]")
@@ -36,8 +34,12 @@ def process_jira(jira_result, days=-1):
                 pr_review[issue_key]  = int(times_spends)
             else:
                 if non_pr_review.get(issue_key) is not None:
-                    comments_set, _ = non_pr_review[issue_key]
-                    comments_set.add(comment.strip())
+                    if comment is not None:
+                        comments_set, _ = non_pr_review[issue_key]
+                        comments_set.add(comment.strip())
+                    else:
+                        comments_set, _ = non_pr_review[issue_key]
+                        comments_set.add("Missing")
                 else:
                     if comment is not None:
                         non_pr_review[issue_key] = ({ comment.strip() }, times_spends)

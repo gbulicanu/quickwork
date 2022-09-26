@@ -21,5 +21,5 @@ if __name__ == "__main__":
         sys.stderr.write("Invalid arguments provided.")
         sys.exit(1)
 
-    days_input = sys.argv[1].strip()
-    main(int(days_input))
+    DAYS_INPUT = sys.argv[1].strip()
+    main(int(DAYS_INPUT))

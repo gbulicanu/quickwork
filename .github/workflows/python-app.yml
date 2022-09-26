@@ -38,7 +38,7 @@ jobs:
     #     flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
     - name: Analyzing the code with pylint
       run: |
-        pylint $(git ls-files '*.py')
+        pipenv run pylint $(git ls-files '*.py')
     - name: Test with pytest
       run: |
         pipenv run pytest --cov-report html --cov=app tests/

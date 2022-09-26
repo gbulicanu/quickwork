@@ -6,7 +6,7 @@ import requests
 
 from requests.auth import HTTPBasicAuth
 
-from .environment import JIRA_ENDPOINT, JIRA_USER, JIRA_SECRET
+from .environment import JIRA_ENDPOINT, JIRA_TIMEOUT, JIRA_USER, JIRA_SECRET
 
 
 def execute_jql(from_days = None, max_results = 10):
@@ -23,8 +23,7 @@ def execute_jql(from_days = None, max_results = 10):
     }
 
     from_days_or_empty = from_days or ""
-    jql = f"worklogAuthor = currentUser() AND worklogDate >= startOfDay({from_days_or_empty})" \
-    .format()
+    jql = f"worklogAuthor = currentUser() AND worklogDate >= startOfDay({from_days_or_empty})"
 
     payload = json.dumps({
         "expand": [],
@@ -44,7 +43,8 @@ def execute_jql(from_days = None, max_results = 10):
         JIRA_ENDPOINT,
         data=payload,
         headers=headers,
-        auth=auth
+        auth=auth,
+        timeout=JIRA_TIMEOUT
     )
 
     result = json.loads(response.text)

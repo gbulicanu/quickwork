@@ -10,12 +10,13 @@ insert_final_newline = true
 trim_trailing_whitespace = true
 charset = utf-8
 
-[*.py]
+# 4 space indentation
+[*.{py,r,R}]
 indent_style = space
-indent_size =4
+indent_size = 4
 
 # 2 space indentation
-[*.{py,js,json,y{a,}ml,html,cwl}]
+[*.{js,json,y{a,}ml,html,cwl}]
 indent_style = space
 indent_size = 2
 
