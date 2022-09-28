@@ -1,0 +1,103 @@
+{
+  "expand": "schema,names",
+  "startAt": 0,
+  "maxResults": 10,
+  "total": {{tickets.length}},
+  "issues": [
+    {{#each tickets}}
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "{{id}}",
+      "self": "https://test-project.atlassian.net/rest/api/3/issue/{{id}}",
+      "key": "{{key}}",
+      "fields": {
+        "summary": "{{summary}}",
+        "worklog": {
+          "startAt": 0,
+          "maxResults": 20,
+          "total": {{../tickets.length}},
+          "worklogs": [
+            {{#each worklogs}}
+            {
+              "self": "https://test-project.atlassian.net/rest/api/3/issue/{{../id}}/worklog/{{id}}",
+              "author": {
+                "self": "https://test-project.atlassian.net/rest/api/3/user?accountId={{author_accountId}}",
+                "accountId": "{{author_accountId}}",
+                "avatarUrls": {
+                  "48x48": "https://secure.gravatar.com/avatar/7e21f7dcc4c330a9f94042cc396d7366?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FVK-2.png",
+                  "24x24": "https://secure.gravatar.com/avatar/7e21f7dcc4c330a9f94042cc396d7366?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FVK-2.png",
+                  "16x16": "https://secure.gravatar.com/avatar/7e21f7dcc4c330a9f94042cc396d7366?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FVK-2.png",
+                  "32x32": "https://secure.gravatar.com/avatar/7e21f7dcc4c330a9f94042cc396d7366?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FVK-2.png"
+                },
+                {{#if author_email}}
+                "emailAddress": "{{author_email}}",
+                {{/if}}
+                "displayName": "{{author_dn}}",
+                "active": true,
+                "timeZone": "Europe/Dublin",
+                "accountType": "atlassian"
+              },
+              "updateAuthor": {
+                "self": "https://test-project.atlassian.net/rest/api/3/user?accountId={{updateAuthor_accountId}}",
+                "accountId": "{{updateAuthor_accountId}}",
+                "avatarUrls": {
+                  "48x48": "https://secure.gravatar.com/avatar/7e21f7dcc4c330a9f94042cc396d7366?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FVK-2.png",
+                  "24x24": "https://secure.gravatar.com/avatar/7e21f7dcc4c330a9f94042cc396d7366?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FVK-2.png",
+                  "16x16": "https://secure.gravatar.com/avatar/7e21f7dcc4c330a9f94042cc396d7366?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FVK-2.png",
+                  "32x32": "https://secure.gravatar.com/avatar/7e21f7dcc4c330a9f94042cc396d7366?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FVK-2.png"
+                },
+                {{#if updateAuthor_email}}
+                "emailAddress": "{{updateAuthor_email}}",
+                {{/if}}
+                "displayName": "{{updateAuthor_dn}}",
+                "active": true,
+                "timeZone": "Europe/Dublin",
+                "accountType": "atlassian"
+              },
+              {{#if comment}}
+              "comment": {
+                "version": 1,
+                "type": "doc",
+                "content": [
+                  {
+                    "type": "paragraph",
+                    "content": [
+                      {
+                        "type": "text",
+                        "text": "{{comment}}"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {{/if}}
+              "created": "{{../../yesterday_ymd}}T20:10:41.843+0100",
+              "updated": "{{../../yesterday_ymd}}T20:10:41.843+0100",
+              "started": "{{../../yesterday_ymd}}T19:10:35.537+0100",
+              "timeSpent": "1h",
+              "timeSpentSeconds": {{time}},
+              "id": "{{id}}",
+              "issueId": "{{../id}}"
+            }{{#unless @last}},{{/unless}}
+            {{/each}}
+          ]
+        },
+        "status": {
+          "self": "https://test-project.atlassian.net/rest/api/3/status/{{status_id}}",
+          "description": "Issue implemented and waiting to be shipped into a test environment",
+          "iconUrl": "https://test-project.atlassian.net/images/icons/statuses/generic.png",
+          "name": "{{status_name}}",
+          "id": "{{status_id}}",
+          "statusCategory": {
+            "self": "https://test-project.atlassian.net/rest/api/3/statuscategory/4",
+            "id": 4,
+            "key": "indeterminate",
+            "colorName": "yellow",
+            "name": "{{status_name}}"
+          }
+        }
+      }
+    }{{#unless @last}},{{/unless}}
+    {{/each}}
+  ]
+}

@@ -34,6 +34,7 @@ jobs:
         pipenv run pylint $(git ls-files '*.py')
     - name: Test
       run: |
+        cp .env.template .env
         pipenv run pytest --cov-config=.coveragerc --cov-report xml --cov=app tests/
     - name: Codecov
       uses: codecov/codecov-action@v3

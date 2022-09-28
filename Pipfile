@@ -15,6 +15,9 @@ pyinstaller = "*"
 pytest = "*"
 pytest-cov = "*"
 pylint = "*"
+pytest-mock = "*"
+requests-mock = "*"
+pybars3 = "*"
 
 [requires]
 python_version = "3.9"
