@@ -129,9 +129,10 @@ def test_process_jira():
             ],
         })
         tickets, pr_tickets = process_jira(json.loads(str(test_out)))
+        comment, time = tickets["TEST-10"]
+
         assert tickets.get("TEST-10") is not None
         assert pr_tickets.get("TEST-11") is not None
-        comment, time = tickets["TEST-10"]
         assert set(comment) == { "Testing", "Debugging" }
         assert int(time) == 28800
         assert int(pr_tickets["TEST-11"]) == 3600
