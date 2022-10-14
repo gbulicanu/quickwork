@@ -13,6 +13,7 @@ def report(local_args):
     """
     day = 0
     day_arg = local_args.day
+    print_time = bool(local_args.print_time)
     try:
         day = int(day_arg)
     except ValueError:
@@ -21,7 +22,7 @@ def report(local_args):
 
     jira_result = execute_jql(day)
     tickets, pr_review = process_jira(jira_result, days=day)
-    print_results(tickets, pr_review)
+    print_results(tickets, pr_review, print_time=print_time)
 
 parser = argparse.ArgumentParser(
     prog="qw",
