@@ -1,6 +1,8 @@
 """ Utils functions module.
 """
+from datetime import timedelta
 from string import Formatter
+from time import strptime
 
 
 def __strfdelta_trim_zero_hours(input_str):
@@ -56,3 +58,23 @@ def strfdelta(
         if field in desired_fields and field in constants:
             values[field], remainder = divmod(remainder, constants[field])
     return __strfdelta_trim_zero_hours(formatter.format(fmt, **values))
+
+def strpdelta(input_str: str):
+    """Convert a str in in '{H}h {M}m' or '{H}h{M}m' format to a timedelta.
+
+    Some examples:
+        '{H}h {M}m' --> '4h 43m'
+        '{H}h' --> '2h'
+        '{M}m' --> '5m'
+    """
+
+    input_str = input_str.replace(" ", "")
+
+    time_struct = strptime(
+        input_str,
+        "%Mm" if "m" in set(input_str) and "h" not in set(input_str)
+        else (
+            "%Hh" if "h" in set(input_str) and "m" not in set(input_str)
+            else "%Hh%Mm"))
+
+    return timedelta(hours=time_struct.tm_hour, minutes=time_struct.tm_min)

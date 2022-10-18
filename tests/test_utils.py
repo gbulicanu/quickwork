@@ -4,7 +4,7 @@ from datetime import timedelta
 
 import pytest
 
-from app.utils import strfdelta
+from app.utils import strfdelta, strpdelta
 
 
 @pytest.mark.parametrize(["time_delta", "fmt", "input_type", "expected"], [
@@ -25,3 +25,15 @@ def test_strfdelta(time_delta, fmt, input_type, expected):
     """ test strfdelta
     """
     assert strfdelta(time_delta, fmt=fmt, input_type=input_type) == expected
+
+@pytest.mark.parametrize(["input_str", "expected"], [
+    ("2h30m", timedelta(seconds=2*60*60+30*60)),
+    ("2h 30m", timedelta(seconds=2*60*60+30*60)),
+    ("3h 20m", timedelta(seconds=3*60*60+20*60)),
+    ("0h 5m", timedelta(seconds=5*60)),
+    ("4m", timedelta(seconds=4*60)),
+])
+def test_strpdelta(input_str, expected):
+    """ test strpdelta
+    """
+    assert strpdelta(input_str) == expected
