@@ -3,13 +3,13 @@
 import argparse
 import sys
 
-from app.jira import execute_jql
+from app.jira import add_worklog, execute_jql
 from app.parser import process_jira
 from app.printer import print_results
 
 def report(local_args):
     """
-    Reports sub-command main entry point.
+    Reports sub-command handler.
     """
     day = 0
     day_arg = local_args.day
@@ -23,6 +23,12 @@ def report(local_args):
     jira_result = execute_jql(day)
     tickets, pr_review = process_jira(jira_result, days=day)
     print_results(tickets, pr_review, print_time=print_time)
+
+def log_work(local_args):
+    """"
+    Low work sub-command handler.
+    """
+    add_worklog(str(local_args.issue_key), str(local_args.time), str(local_args.comment))
 
 parser = argparse.ArgumentParser(
     prog="qw",
@@ -44,7 +50,32 @@ report_parser.add_argument(
     default=False,
     choices=[False, True],
     help="Print time in generated report.")
+
 report_parser.set_defaults(func=report)
+
+log_parser = subparsers.add_parser("log", aliases=["l"])
+log_parser.add_argument(
+    "--issue-key",
+    "-k",
+    type=str,
+    help="Issue tracker number (JIRA i.e. PROJ-311) (default "
+        "first in progress ticket found for current user) .")
+
+log_parser.add_argument(
+    "--time",
+    "-t",
+    type=str,
+    default="5m",
+    help="Time amount to to log (default '5m' five minutes).")
+
+log_parser.add_argument(
+    "--comment",
+    "-c",
+    type=str,
+    default="PR Review",
+    help="Comment to add to work log (default 'PR Review').")
+
+log_parser.set_defaults(func=log_work)
 
 if __name__ == "__main__":
     args = parser.parse_args()

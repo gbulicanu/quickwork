@@ -52,3 +52,9 @@ def execute_jql(from_days = None, max_results = 10):
     # logging.debug("result from jql: \n%s", json.dumps(result, indent=2))
 
     return result
+
+def add_worklog(issue_key: str, time: str, comment: str):
+    """ Add worklog to <issue_key> ticket (or to first assigned ticket if None)
+    """
+    logging.info("%s:add_worklog('%s', '%s', '%s') jql executed",
+        __name__, issue_key, time, comment)
