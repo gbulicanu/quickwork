@@ -56,5 +56,5 @@ def execute_jql(from_days = None, max_results = 10):
 def add_worklog(issue_key: str, time: str, comment: str):
     """ Add worklog to <issue_key> ticket (or to first assigned ticket if None)
     """
-    logging.info("%s:add_worklog('%s', '%s', '%s') jql executed",
+    logging.info("%s:add_worklog(%s, %s, %s) called",
         __name__, issue_key, time, comment)
