@@ -7,6 +7,7 @@ from app.jira import add_worklog, execute_jql
 from app.parser import process_jira
 from app.printer import print_results
 
+
 def report(local_args):
     """
     Reports sub-command handler.
@@ -24,11 +25,13 @@ def report(local_args):
     tickets, pr_review = process_jira(jira_result, days=day)
     print_results(tickets, pr_review, print_time=print_time)
 
+
 def log_work(local_args):
-    """"
+    """
     Low work sub-command handler.
     """
-    add_worklog(str(local_args.issue_key), str(local_args.time), str(local_args.comment))
+    add_worklog(local_args.issue_key, local_args.time, local_args.comment)
+
 
 parser = argparse.ArgumentParser(
     prog="qw",
@@ -59,7 +62,7 @@ log_parser.add_argument(
     "-k",
     type=str,
     help="Issue tracker number (JIRA i.e. PROJ-311) (default "
-        "first in progress ticket found for current user) .")
+         "first in progress ticket found for current user) .")
 
 log_parser.add_argument(
     "--time",
