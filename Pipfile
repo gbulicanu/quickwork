@@ -18,6 +18,7 @@ pylint = "*"
 pytest-mock = "*"
 requests-mock = "*"
 pybars3 = "*"
+macholib = "*"
 
 [requires]
 python_version = "3.9"
