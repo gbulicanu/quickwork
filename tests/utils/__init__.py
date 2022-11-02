@@ -22,3 +22,8 @@ def anything(cls):
             return True
 
     return Anything()
+
+def empty_stub():
+    """ Empty stub function.
+    """
+    pass
