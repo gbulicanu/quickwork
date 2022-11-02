@@ -21,9 +21,9 @@ def anything(cls):
         def __eq__(self, other):
             return True
 
-    return Anything()
+        def empty_stub(self):
+            """ Empty stub method.
+            """
+            return None
 
-def empty_stub():
-    """ Empty stub function.
-    """
-    return None
+    return Anything()
