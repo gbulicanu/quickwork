@@ -26,4 +26,4 @@ def anything(cls):
 def empty_stub():
     """ Empty stub function.
     """
-    pass
+    return None
