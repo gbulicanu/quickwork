@@ -24,7 +24,7 @@ def test_execute_jql(from_days, expected_jql, mocker: MockerFixture, requests_mo
     response_text = "{}"
     request_matcher = requests_mock.request(
         method="POST",
-        url=JIRA_ENDPOINT,
+        url=f"{JIRA_ENDPOINT}/search",
         text=response_text)
     logging_info_patcher = mocker.patch("logging.info")
     assert execute_jql(from_days) == json.loads(response_text)
@@ -41,8 +41,12 @@ def test_add_worklog_with_none_issue_key_will_get_current(
     response_text = '{"issues": [{"key": "TEST-01"}]}'
     request_matcher = requests_mock.request(
         method="POST",
-        url=JIRA_ENDPOINT,
+        url=f"{JIRA_ENDPOINT}/search",
         text=response_text)
+    requests_mock.request(
+        method="POST",
+        url=f"{JIRA_ENDPOINT}/issue/TEST-01/worklog",
+        text="{}")
     logging_info_patcher = mocker.patch("logging.info")
     add_worklog(None, "5m", "PR Review")
     current_ticket_request_json = request_matcher.request_history[0].json()
