@@ -9,6 +9,7 @@
     "cSpell.words": [
         "Quickwork",
         "strfdelta",
-        "strpdelta"
+        "strpdelta",
+        "timespec"
     ]
 }
