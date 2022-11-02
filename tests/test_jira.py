@@ -60,3 +60,20 @@ def test_add_worklog_with_none_issue_key_will_get_current(
         "TEST-01",
         anything(str),
         anything(str))
+
+
+def test_add_worklog_will_log_error_on_failed_post_to_jira(
+    mocker: MockerFixture,
+    requests_mock: Mocker
+):
+    """ Test add_worklog with posting to jira failing.
+    """
+    requests_mock.request(
+        method="POST",
+        url=f"{JIRA_ENDPOINT}/issue/TEST-01/worklog",
+        text="{}",
+        status_code=401,
+        reason="Bad Request")
+    logging_error_patcher = mocker.patch("logging.error")
+    add_worklog("TEST-01", "5m", "PR Review")
+    logging_error_patcher.assert_called()

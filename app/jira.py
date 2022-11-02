@@ -132,8 +132,8 @@ def add_worklog(
     )
 
     if response.status_code > 299:
-        logging.error("%s:http error: %s reason: %s body: %s",
+        logging.error("%s:http error: %d reason: %s body: %s",
                 __name__, response.status_code, response.reason, response.json())
-
-    logging.info("%s:add_worklog(%s, %s, %s) succeeded",
-                 __name__, issue_key, time, comment)
+    else:
+        logging.info("%s:add_worklog(%s, %s, %s) succeeded",
+                    __name__, issue_key, time, comment)
