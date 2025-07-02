@@ -1,11 +1,14 @@
-""" Main entry point module.
-"""
+"""Main entry point module."""
+
 import argparse
 import sys
 
 from app.jira import add_worklog, execute_jql
 from app.parser import process_jira
 from app.printer import print_results
+
+
+__version__ = "0.1.0"
 
 
 def report(local_args):
@@ -34,8 +37,7 @@ def log_work(local_args):
 
 
 parser = argparse.ArgumentParser(
-    prog="qw",
-    description="Quickwork - developer personal admin cli."
+    prog="qw", description="Quickwork - developer personal admin cli."
 )
 subparsers = parser.add_subparsers()
 
@@ -45,14 +47,12 @@ report_parser.add_argument(
     type=str,
     default="t",
     choices=["today", "t", "yesterday", "y", "-2", "-3", "-4"],
-    help="Day to build report for.")
+    help="Day to build report for.",
+)
 
 report_parser.add_argument(
-    "--print-time",
-    type=bool,
-    default=False,
-    choices=[False, True],
-    help="Print time in generated report.")
+    "--print-time", action="store_true", help="Print time in generated report."
+)
 
 report_parser.set_defaults(func=report)
 
@@ -62,21 +62,24 @@ log_parser.add_argument(
     "-k",
     type=str,
     help="Issue tracker number (JIRA i.e. PROJ-311) (default "
-         "first in progress ticket found for current user) .")
+    "first in progress ticket found for current user) .",
+)
 
 log_parser.add_argument(
     "--time",
     "-t",
     type=str,
     default="5m",
-    help="Time amount to to log (default '5m' five minutes).")
+    help="Time amount to to log (default '5m' five minutes).",
+)
 
 log_parser.add_argument(
     "--comment",
     "-c",
     type=str,
     default="PR Review",
-    help="Comment to add to work log (default 'PR Review').")
+    help="Comment to add to work log (default 'PR Review').",
+)
 
 log_parser.set_defaults(func=log_work)
 
