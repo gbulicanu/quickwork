@@ -62,3 +62,31 @@ jobs:
         pipenv run pyinstaller main.py -n qw
         ls -al dist/qw/
 
+    - name: Get version
+      id: get_version
+      run: |
+        VERSION=$(python -c "import re; f=open('main.py').read(); m=re.search(r'__version__\s*=\s*[\'\\\"]([^\'\\\"]+)[\'\\\"]', f); print(m.group(1))")
+        echo "version=$VERSION" >> $GITHUB_OUTPUT
+
+    - name: Zip artifact
+      run: |
+        cd dist
+        zip -r qw-${{ steps.get_version.outputs.version }}.zip qw
+
+    - name: Tar artifact
+      run: |
+        cd dist
+        tar -czvf qw-${{ steps.get_version.outputs.version }}.tar.gz qw
+
+    - name: Upload Installer Artifact (zip)
+      uses: actions/upload-artifact@v3
+      with:
+        name: qw-${{ steps.get_version.outputs.version }}
+        path: dist/qw-${{ steps.get_version.outputs.version }}.zip
+
+    - name: Upload Installer Artifact (tar.gz)
+      uses: actions/upload-artifact@v3
+      with:
+        name: qw-${{ steps.get_version.outputs.version }}-tar
+        path: dist/qw-${{ steps.get_version.outputs.version }}.tar.gz
+
