@@ -11,6 +11,7 @@ from app.printer import print_results
 __version__ = "0.1.0"
 
 
+
 def report(local_args):
     """
     Reports sub-command handler.
