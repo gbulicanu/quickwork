@@ -10,7 +10,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ubuntu-latest, macos-latest]
+        os: [ubuntu-latest, windows-latest, macos-latest]
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
@@ -24,21 +24,26 @@ jobs:
           pip install pipenv pylint
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
           if [ -f Pipfile ]; then pipenv install --dev; fi
+        shell: bash
       - name: Lint
         run: |
           pipenv run pylint $(git ls-files '*.py')
+        shell: bash
       - name: Test
         run: |
           cp .env.template .env
           pipenv run pytest --cov-config=.coveragerc --cov-report xml --cov=app tests/
+        shell: bash
       - name: Installer
         run: |
           pipenv run pyinstaller main.py -n qw
           ls -al dist/qw/
+        shell: bash
       - name: Tar artifact
         run: |
           cd dist
           tar -czvf qw-${{ github.ref_name }}-${{ matrix.os }}.tar.gz qw
+        shell: bash
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
