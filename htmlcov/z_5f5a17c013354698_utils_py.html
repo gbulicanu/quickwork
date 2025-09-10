@@ -4,7 +4,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>Coverage for app/utils.py: 100%</title>
     <link rel="icon" sizes="32x32" href="favicon_32_cb_58284776.png">
-    <link rel="stylesheet" href="style_cb_81f8c14c.css" type="text/css">
+    <link rel="stylesheet" href="style_cb_6b508a39.css" type="text/css">
     <script src="coverage_html_cb_6fb7b396.js" defer></script>
 </head>
 <body class="pyfile">
@@ -64,8 +64,8 @@
             <a id="indexLink" class="nav" href="index.html">&Hat; index</a> &nbsp; &nbsp;
             <a id="nextFileLink" class="nav" href="index.html">&#xbb; next</a>
             &nbsp; &nbsp; &nbsp;
-            <a class="nav" href="https://coverage.readthedocs.io/en/7.9.1">coverage.py v7.9.1</a>,
-            created at 2025-07-02 10:25 +0000
+            <a class="nav" href="https://coverage.readthedocs.io/en/7.10.5">coverage.py v7.10.5</a>,
+            created at 2025-09-10 10:42 +0000
         </p>
         <aside class="hidden">
             <button type="button" class="button_next_chunk" data-shortcut="j"></button>
@@ -92,9 +92,9 @@
     <p class="pln"><span class="n"><a id="t10" href="#t10">10</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
     <p class="pln"><span class="n"><a id="t11" href="#t11">11</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
     <p class="run"><span class="n"><a id="t12" href="#t12">12</a></span><span class="t"><span class="key">def</span> <span class="nam">strfdelta</span><span class="op">(</span>&nbsp;</span><span class="r"></span></p>
-    <p class="pln"><span class="n"><a id="t13" href="#t13">13</a></span><span class="t">    <span class="nam">time_delta</span><span class="op">,</span>&nbsp;</span><span class="r"></span></p>
-    <p class="pln"><span class="n"><a id="t14" href="#t14">14</a></span><span class="t">    <span class="nam">fmt</span><span class="op">=</span><span class="str">'{D:02}d {H:02}h {M:02}m {S:02}s'</span><span class="op">,</span>&nbsp;</span><span class="r"></span></p>
-    <p class="pln"><span class="n"><a id="t15" href="#t15">15</a></span><span class="t">    <span class="nam">input_type</span><span class="op">=</span><span class="str">'timedelta'</span><span class="op">)</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
+    <p class="run run2"><span class="n"><a id="t13" href="#t13">13</a></span><span class="t">    <span class="nam">time_delta</span><span class="op">,</span>&nbsp;</span><span class="r"></span></p>
+    <p class="run run2"><span class="n"><a id="t14" href="#t14">14</a></span><span class="t">    <span class="nam">fmt</span><span class="op">=</span><span class="str">'{D:02}d {H:02}h {M:02}m {S:02}s'</span><span class="op">,</span>&nbsp;</span><span class="r"></span></p>
+    <p class="run run2"><span class="n"><a id="t15" href="#t15">15</a></span><span class="t">    <span class="nam">input_type</span><span class="op">=</span><span class="str">'timedelta'</span><span class="op">)</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
     <p class="pln"><span class="n"><a id="t16" href="#t16">16</a></span><span class="t">    <span class="str">"""Convert a datetime.timedelta object or a regular number to a custom-</span>&nbsp;</span><span class="r"></span></p>
     <p class="pln"><span class="n"><a id="t17" href="#t17">17</a></span><span class="t"><span class="str">    formatted string, just like the stftime() method does for datetime.datetime</span>&nbsp;</span><span class="r"></span></p>
     <p class="pln"><span class="n"><a id="t18" href="#t18">18</a></span><span class="t"><span class="str">    objects.</span>&nbsp;</span><span class="r"></span></p>
@@ -153,11 +153,11 @@
     <p class="run"><span class="n"><a id="t71" href="#t71">71</a></span><span class="t">    <span class="nam">input_str</span> <span class="op">=</span> <span class="nam">input_str</span><span class="op">.</span><span class="nam">replace</span><span class="op">(</span><span class="str">" "</span><span class="op">,</span> <span class="str">""</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
     <p class="pln"><span class="n"><a id="t72" href="#t72">72</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
     <p class="run"><span class="n"><a id="t73" href="#t73">73</a></span><span class="t">    <span class="nam">time_struct</span> <span class="op">=</span> <span class="nam">strptime</span><span class="op">(</span>&nbsp;</span><span class="r"></span></p>
-    <p class="pln"><span class="n"><a id="t74" href="#t74">74</a></span><span class="t">        <span class="nam">input_str</span><span class="op">,</span>&nbsp;</span><span class="r"></span></p>
-    <p class="pln"><span class="n"><a id="t75" href="#t75">75</a></span><span class="t">        <span class="str">"%Mm"</span> <span class="key">if</span> <span class="str">"m"</span> <span class="key">in</span> <span class="nam">set</span><span class="op">(</span><span class="nam">input_str</span><span class="op">)</span> <span class="key">and</span> <span class="str">"h"</span> <span class="key">not</span> <span class="key">in</span> <span class="nam">set</span><span class="op">(</span><span class="nam">input_str</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
-    <p class="pln"><span class="n"><a id="t76" href="#t76">76</a></span><span class="t">        <span class="key">else</span> <span class="op">(</span>&nbsp;</span><span class="r"></span></p>
-    <p class="pln"><span class="n"><a id="t77" href="#t77">77</a></span><span class="t">            <span class="str">"%Hh"</span> <span class="key">if</span> <span class="str">"h"</span> <span class="key">in</span> <span class="nam">set</span><span class="op">(</span><span class="nam">input_str</span><span class="op">)</span> <span class="key">and</span> <span class="str">"m"</span> <span class="key">not</span> <span class="key">in</span> <span class="nam">set</span><span class="op">(</span><span class="nam">input_str</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
-    <p class="pln"><span class="n"><a id="t78" href="#t78">78</a></span><span class="t">            <span class="key">else</span> <span class="str">"%Hh%Mm"</span><span class="op">)</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
+    <p class="run run2"><span class="n"><a id="t74" href="#t74">74</a></span><span class="t">        <span class="nam">input_str</span><span class="op">,</span>&nbsp;</span><span class="r"></span></p>
+    <p class="run run2"><span class="n"><a id="t75" href="#t75">75</a></span><span class="t">        <span class="str">"%Mm"</span> <span class="key">if</span> <span class="str">"m"</span> <span class="key">in</span> <span class="nam">set</span><span class="op">(</span><span class="nam">input_str</span><span class="op">)</span> <span class="key">and</span> <span class="str">"h"</span> <span class="key">not</span> <span class="key">in</span> <span class="nam">set</span><span class="op">(</span><span class="nam">input_str</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
+    <p class="run run2"><span class="n"><a id="t76" href="#t76">76</a></span><span class="t">        <span class="key">else</span> <span class="op">(</span>&nbsp;</span><span class="r"></span></p>
+    <p class="run run2"><span class="n"><a id="t77" href="#t77">77</a></span><span class="t">            <span class="str">"%Hh"</span> <span class="key">if</span> <span class="str">"h"</span> <span class="key">in</span> <span class="nam">set</span><span class="op">(</span><span class="nam">input_str</span><span class="op">)</span> <span class="key">and</span> <span class="str">"m"</span> <span class="key">not</span> <span class="key">in</span> <span class="nam">set</span><span class="op">(</span><span class="nam">input_str</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
+    <p class="run run2"><span class="n"><a id="t78" href="#t78">78</a></span><span class="t">            <span class="key">else</span> <span class="str">"%Hh%Mm"</span><span class="op">)</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
     <p class="pln"><span class="n"><a id="t79" href="#t79">79</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
     <p class="run"><span class="n"><a id="t80" href="#t80">80</a></span><span class="t">    <span class="key">return</span> <span class="nam">timedelta</span><span class="op">(</span><span class="nam">hours</span><span class="op">=</span><span class="nam">time_struct</span><span class="op">.</span><span class="nam">tm_hour</span><span class="op">,</span> <span class="nam">minutes</span><span class="op">=</span><span class="nam">time_struct</span><span class="op">.</span><span class="nam">tm_min</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
 </main>
@@ -168,8 +168,8 @@
             <a class="nav" href="index.html">&Hat; index</a> &nbsp; &nbsp;
             <a class="nav" href="index.html">&#xbb; next</a>
             &nbsp; &nbsp; &nbsp;
-            <a class="nav" href="https://coverage.readthedocs.io/en/7.9.1">coverage.py v7.9.1</a>,
-            created at 2025-07-02 10:25 +0000
+            <a class="nav" href="https://coverage.readthedocs.io/en/7.10.5">coverage.py v7.10.5</a>,
+            created at 2025-09-10 10:42 +0000
         </p>
     </div>
 </footer>
