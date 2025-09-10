@@ -30,7 +30,7 @@ def execute_jql(from_days=None, max_results=10):
     jql = f"worklogAuthor = currentUser() AND worklogDate >= startOfDay({from_days_or_empty})"
 
     payload = json.dumps({
-        "expand": [],
+        "expand": "",
         "jql": jql,
         "maxResults": max_results,
         "fieldsByKeys": False,
@@ -38,13 +38,12 @@ def execute_jql(from_days=None, max_results=10):
             "summary",
             "status",
             "worklog",
-        ],
-        "startAt": 0
+        ]
     })
 
     response = requests.request(
         "POST",
-        f"{JIRA_ENDPOINT}/search",
+        f"{JIRA_ENDPOINT}/search/jql",
         data=payload,
         headers=headers,
         auth=auth,
@@ -88,7 +87,7 @@ def add_worklog(
 
         response = requests.request(
             "POST",
-            f"{JIRA_ENDPOINT}/search",
+            f"{JIRA_ENDPOINT}/search/jql",
             data=payload,
             headers=headers,
             auth=auth,
