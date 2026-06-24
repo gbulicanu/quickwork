@@ -1,16 +1,17 @@
 """ main.py test module.
 """
 
+import argparse
+
 import pytest
 
 from pytest_mock import MockerFixture
 
-from main import create_parser, log_work, main, report
+from main import create_parser, main
 
 
 def test_create_parser_returns_parser():
     """ Test create_parser returns an ArgumentParser. """
-    import argparse
     arg_parser = create_parser()
     assert isinstance(arg_parser, argparse.ArgumentParser)
 
