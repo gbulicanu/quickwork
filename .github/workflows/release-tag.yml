@@ -13,9 +13,9 @@ jobs:
         os: [ubuntu-latest, windows-latest, macos-latest]
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
       - name: Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
           python-version: "3.12"
       - name: Dependencies
@@ -45,7 +45,7 @@ jobs:
           tar -czvf qw-${{ github.ref_name }}-${{ matrix.os }}.tar.gz qw
         shell: bash
       - name: Upload Artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: qw-${{ github.ref_name }}-${{ matrix.os }}-tar
           path: dist/qw-${{ github.ref_name }}-${{ matrix.os }}.tar.gz
@@ -54,9 +54,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Download Artifacts
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v5
       - name: Create GitHub Release
-        uses: softprops/action-gh-release@v2
+        uses: softprops/action-gh-release@v3
         with:
           files: qw-*/qw-*
           tag_name: ${{ github.ref_name }}
