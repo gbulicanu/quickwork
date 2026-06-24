@@ -32,7 +32,7 @@ jobs:
       - name: Test
         run: |
           cp .env.template .env
-          pipenv run pytest --cov-config=.coveragerc --cov-report xml --cov=app tests/
+          pipenv run pytest --cov-config=.coveragerc --cov-report xml --junitxml=junit.xml -o junit_family=legacy --cov=app tests/
         shell: bash
       - name: Installer
         run: |
