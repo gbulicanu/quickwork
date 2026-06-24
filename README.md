@@ -10,7 +10,7 @@
 | app/parser.py       |       32 |        2 |     94% |    45, 51 |
 | app/printer.py      |       25 |        0 |    100% |           |
 | app/utils.py        |       31 |        0 |    100% |           |
-|           **TOTAL** |  **142** |    **2** | **99%** |           |
+| **TOTAL**           |  **142** |    **2** | **99%** |           |
 
 
 ## Setup coverage badge
