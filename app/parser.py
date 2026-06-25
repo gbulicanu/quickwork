@@ -11,6 +11,9 @@ def __filter_worklog(current, from_date):
     current_dt = datetime.strptime(current["started"], '%Y-%m-%dT%H:%M:%S.%f%z')
     return current_dt.date() >= from_date
 
+def __normalize_comment(comment):
+    return comment.strip() if comment is not None else "Missing"
+
 def process_jira(jira_result, days=-1):
     """ Process JIRA JSON result.
     """
@@ -30,8 +33,9 @@ def process_jira(jira_result, days=-1):
             [match.value for match in json_path_worklogs.find(issue)])
         for worklog in worklogs:
             comment = ([match.value for match in json_path_comment.find(worklog)] or [None])[0]
+            comment = __normalize_comment(comment)
             time_spent = [match.value for match in parse("timeSpentSeconds").find(worklog)][0]
-            if comment is not None and comment.strip().lower() == "pr review":
+            if comment.lower() == "pr review":
                 if not issue_key in pr_review:
                     pr_review[issue_key] = int(time_spent)
                 else:
@@ -39,15 +43,9 @@ def process_jira(jira_result, days=-1):
             else:
                 if issue_key in tickets:
                     comments_set, ticket_spent_time = tickets[issue_key]
-                    if comment is not None:
-                        comments_set.add(comment.strip())
-                    else:
-                        comments_set.add("Missing")
+                    comments_set.add(comment)
                     tickets[issue_key] = (comments_set, ticket_spent_time + time_spent)
                 else:
-                    if comment is not None:
-                        tickets[issue_key] = ({ comment.strip() }, time_spent)
-                    else:
-                        tickets[issue_key] = ({ "Missing" }, time_spent)
+                    tickets[issue_key] = ({ comment }, time_spent)
 
     return tickets, pr_review
