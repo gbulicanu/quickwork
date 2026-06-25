@@ -166,6 +166,7 @@ def test_process_jira():
         assert set(comment) == { "Testing", "Debugging", "Missing" }
         assert int(time) == 36000
         assert int(pr_tickets["TEST-11"]) == 3600
+        assert "TEST-12" not in pr_tickets
         # TEST-12 should have Missing comment
         comment_12, time_12 = tickets["TEST-12"]
         assert set(comment_12) == { "Missing" }
