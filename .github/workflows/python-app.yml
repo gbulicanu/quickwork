@@ -45,10 +45,10 @@ jobs:
         files: ./coverage.xml
         flags: unittests
     - name: Codecov Tests
-      if: ${{ !cancelled() }}
-      uses: codecov/test-results-action@v1
+      uses: codecov/codecov-action@v6
       with:
         token: ${{ secrets.CODECOV_TOKEN }}
+        report_type: test_results
     - name: Coverage
       id: coverage_comment
       uses: py-cov-action/python-coverage-comment-action@v3
