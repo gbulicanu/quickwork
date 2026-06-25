@@ -2,15 +2,15 @@
 
 [Full report](https://htmlpreview.github.io/?https://github.com/gbulicanu/quickwork/blob/python-coverage-comment-action-data/htmlcov/index.html)
 
-| Name                |    Stmts |     Miss |   Cover |   Missing |
-|-------------------- | -------: | -------: | ------: | --------: |
-| app/\_\_init\_\_.py |        0 |        0 |    100% |           |
-| app/environment.py  |       15 |        0 |    100% |           |
-| app/jira.py         |       39 |        0 |    100% |           |
-| app/parser.py       |       32 |        2 |     94% |    45, 51 |
-| app/printer.py      |       25 |        0 |    100% |           |
-| app/utils.py        |       31 |        0 |    100% |           |
-| **TOTAL**           |  **142** |    **2** | **99%** |           |
+| Name                |    Stmts |     Miss |    Cover |   Missing |
+|-------------------- | -------: | -------: | -------: | --------: |
+| app/\_\_init\_\_.py |        0 |        0 |     100% |           |
+| app/environment.py  |       15 |        0 |     100% |           |
+| app/jira.py         |       39 |        0 |     100% |           |
+| app/parser.py       |       31 |        0 |     100% |           |
+| app/printer.py      |       25 |        0 |     100% |           |
+| app/utils.py        |       31 |        0 |     100% |           |
+| **TOTAL**           |  **141** |    **0** | **100%** |           |
 
 
 ## Setup coverage badge
