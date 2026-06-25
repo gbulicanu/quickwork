@@ -65,6 +65,16 @@ def test_process_jira():
                             "comment": "Testing"
                         },
                         {
+                            "id": "11261",
+                            "author_accountId": "target-account-id",
+                            "updateAuthor_accountId": "target-account-id",
+                            "author_email": JIRA_USER,
+                            "updateAuthor_email": JIRA_USER,
+                            "author_dn": "Target User",
+                            "updateAuthor_dn": "Target User",
+                            "time": 2 * 3600,
+                        },
+                        {
                             "id": "11260",
                             "author_accountId": "other-account-id",
                             "updateAuthor_accountId": "other-account-id",
@@ -125,6 +135,25 @@ def test_process_jira():
                             "time": 5 * 60,
                         },
                     ]
+                },
+                {
+                    "id": "31034",
+                    "key": "TEST-12",
+                    "summary": "Third test - no comment",
+                    "status_name": "In Progress",
+                    "status_id": "10513",
+                    "worklogs": [
+                        {
+                            "id": "11496",
+                            "author_accountId": "target-account-id",
+                            "updateAuthor_accountId": "target-account-id",
+                            "author_email": JIRA_USER,
+                            "updateAuthor_email": JIRA_USER,
+                            "author_dn": "Target User",
+                            "updateAuthor_dn": "Target User",
+                            "time": 1 * 3600,
+                        },
+                    ]
                 }
             ],
         })
@@ -132,7 +161,12 @@ def test_process_jira():
         comment, time = tickets["TEST-10"]
 
         assert tickets.get("TEST-10") is not None
+        assert tickets.get("TEST-12") is not None
         assert pr_tickets.get("TEST-11") is not None
-        assert set(comment) == { "Testing", "Debugging" }
-        assert int(time) == 28800
+        assert set(comment) == { "Testing", "Debugging", "Missing" }
+        assert int(time) == 36000
         assert int(pr_tickets["TEST-11"]) == 3600
+        # TEST-12 should have Missing comment
+        comment_12, time_12 = tickets["TEST-12"]
+        assert set(comment_12) == { "Missing" }
+        assert int(time_12) == 3600
