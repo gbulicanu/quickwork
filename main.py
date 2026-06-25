@@ -7,7 +7,7 @@ from app.parser import process_jira
 from app.printer import print_results
 
 
-__version__ = "0.1.4"
+__version__ = "0.1.5"
 
 
 def report(local_args):
