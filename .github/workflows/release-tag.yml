@@ -39,7 +39,7 @@ jobs:
           pipenv run pyinstaller main.py -n qw
           ls -al dist/qw/
         shell: bash
-      - name: Tar artifact
+      - name: Tar Artifact
         run: |
           cd dist
           tar -czvf qw-${{ github.ref_name }}-${{ matrix.os }}.tar.gz qw

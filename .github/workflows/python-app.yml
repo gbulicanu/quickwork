@@ -44,6 +44,11 @@ jobs:
         fail_ci_if_error: false
         files: ./coverage.xml
         flags: unittests
+    - name: Codecov Tests
+      if: ${{ !cancelled() }}
+      uses: codecov/test-results-action@v1
+      with:
+        token: ${{ secrets.CODECOV_TOKEN }}
     - name: Coverage
       id: coverage_comment
       uses: py-cov-action/python-coverage-comment-action@v3
